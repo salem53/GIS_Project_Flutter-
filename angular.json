@@ -29,9 +29,18 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets"
               }
+
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "./node_modules/leaflet/dist/leaflet.css",
+              "src/theme/variables.scss", "src/global.scss"
+            ],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,
