@@ -1,0 +1,7 @@
+{
+  "name": "SIG",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
