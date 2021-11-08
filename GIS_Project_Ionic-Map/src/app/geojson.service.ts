@@ -31,23 +31,21 @@ import { HttpClient } from '@angular/common/http';
       
       }
             
-      public GetGeoJSON():Observable<any>{
-        return this.http.get<any>('http://localhost:8081/${trajetId}')
-    }  
-      downloadGeoJson(name_traject:string){
+    //   public GetGeoJSON():Observable<any>{
+    //     return this.http.get<any>('http://localhost:8081/${trajetId}')
+    // }  
+      downloadGeoJson(data:any){
         //GET a geojson object from the back corresponding to that name_traject
         /////////////////////////////////////////
-        
-         this.GetGeoJSON().subscribe((geoJson)=>{
-   
-        const strJson=  JSON.stringify(geoJson);
+
+        const strJson=  JSON.stringify(data);
         const blob = 
         new Blob([strJson
         ], 
                  {type: "text/plain;charset=utf-8"})
         saveAs(blob,"test.geojson"); 
         
-      })
+      
 
       }
     

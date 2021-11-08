@@ -13,7 +13,7 @@ import { HomePage } from './home/home.page';
 import { RegisterPage } from './auth/register/register.page';
 import { LoginPage } from './auth/login/login.page';
 import { GeoJsonService } from './geojson.service';
-import {  getjsonService } from './GetData.service';
+
 @NgModule({
   declarations: [AppComponent,MapComponent],
   entryComponents: [],

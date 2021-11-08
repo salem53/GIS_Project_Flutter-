@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.component.module').then(m => m.MapPageModule)
+  },
+  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
   }
   
 ];

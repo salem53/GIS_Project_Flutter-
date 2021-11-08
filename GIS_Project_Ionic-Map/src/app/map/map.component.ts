@@ -82,6 +82,8 @@ export class MapComponent implements OnInit,OnDestroy {
 
   }
   ngOnInit(): void {
+    
+
     this.initMap();
     console.log("this is our msg "+this.session.user_id)
    }
@@ -93,6 +95,7 @@ export class MapComponent implements OnInit,OnDestroy {
 
  ngOnDestroy(){
    this.subscription.unsubscribe();
+   this.map.remove();
   console.log("session in stop",this.session);
   }
   download(name_traject:string=""){
@@ -110,18 +113,19 @@ export class MapComponent implements OnInit,OnDestroy {
 
       }
 
-  getTrajets(){
-     this.authetService.getTrajets(this.session.user_id).subscribe(
-       res=>{
-        console.log(res);
-        this.trajets=res;
-     })
-  }
+  // getTrajets(){
+  //    this.authetService.getTrajets(this.session.user_id).subscribe(
+  //      res=>{
+  //       console.log(res);
+  //       this.trajets=res;
+  //    })
+  // }
   show(trajet_id:number){
 
 //use a single trajet with id
 //this.markerService.showMarkers(this.map,);
   }
+  
      
   
 }     
