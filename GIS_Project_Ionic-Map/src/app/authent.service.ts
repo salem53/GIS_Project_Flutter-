@@ -16,28 +16,39 @@ import { Observable } from 'rxjs';
       constructor(private http:HttpClient) {
       }  
       public Adduser(firstName:any,lastName:any,email:any,password:any):Observable<any>{
-          return this.http.post<any>(this.apiBaseUrl+'/add',
+          return this.http.post<any>(this.apiBaseUrl+'/user/add',
           {firstName:firstName,lastName:lastName,email:email,password:password})
       }
       public getuser(firstName:any,password:any):boolean{
-        this.http.get<any>(this.apiBaseUrl+'/getUserByEmail/'+firstName).subscribe(
+        this.http.get<any>(this.apiBaseUrl+'/user/getUserByEmail/'+firstName).subscribe(
           Response=>{
+            
+            sessionStorage.setItem('id',Response["id"]);
+            console.log(Response["id"])
             this.admin=Response;
             this.password=this.admin["password"];
-            if(this.password==password)
-            {
-              sessionStorage.setItem('id',this.admin["id"]);
-              sessionStorage.setItem('firstName',this.admin["firstName"]);
-              sessionStorage.setItem('lastName',this.admin["lastName"]);
-              this.connected=true;              
+            
+            
+          //    if(this.password==password)
+          //    {
+          //     sessionStorage.setItem('id',Response["id"]);
+              
+          //     sessionStorage.setItem('firstName',this.admin["firstName"]);
+          //     sessionStorage.setItem('lastName',this.admin["lastName"]);
+          //     this.connected=true;              
 
-           }
+          // }
+
            
            
           },error=>{console.log(alert('user not found'))}
           
         );
         return this.connected;
+      }
+      public getTrajets(user_id):Observable<any>{
+        return this.http.get<any>(this.apiBaseUrl+'/trajet/all/user/'+user_id)
+      
       }
 
 

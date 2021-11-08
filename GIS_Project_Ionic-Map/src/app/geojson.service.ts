@@ -15,18 +15,19 @@ import { HttpClient } from '@angular/common/http';
       constructor(private http:HttpClient) {
       }
 
-      sendGeoJson(S:Session):string{
+      sendGeoJson(S:Session):Observable<any>{
 
        const data ={
             "type": "FeatureCollection",
             "name":S.traject_name,
-            "features": [
-            { "type": "Feature",
-             "properties": {  "dateTime":S.times, "user": { "id" :S.user_id}  },
-              "geometry": { "type": "LineString", "coordinates":S.positions} }
-            ]}
-        return JSON.stringify(data);
-
+            "features": 
+               { "type": "Feature",
+               "properties": {  "dateTime":S.times, "idUser" :S.user_id}  ,
+               "geometry": { "type": "LineString", "coordinates":S.positions}
+               }
+            
+          }
+        return this.http.post<any>('http://localhost:8081/trajet',data)
       
       }
             
@@ -38,16 +39,7 @@ import { HttpClient } from '@angular/common/http';
         /////////////////////////////////////////
         
          this.GetGeoJSON().subscribe((geoJson)=>{
-        //to test
-      
-        // const geoJson={
-        //   "type": "FeatureCollection",
-        //   "name":"test123456",
-        //   "features": [
-        //   { "type": "Feature",
-        //    "properties": {  "dateTime":[], "user": { "id" :12345}  },
-        //     "geometry": { "type": "LineString", "coordinates":[10.2,12]} }
-        //   ]}
+   
         const strJson=  JSON.stringify(geoJson);
         const blob = 
         new Blob([strJson

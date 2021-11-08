@@ -23,11 +23,10 @@ export class RegisterPage implements OnInit {
   }
   
   onSubmit(form){
-    console.log(this.firstName)
-    
     this.authentService.Adduser(this.firstName,this.lastName,this.email,this.password).subscribe(
       response=>{
-
+        console.log(response);
+        
       },error=>{console.log}
     )
   }

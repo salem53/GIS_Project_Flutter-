@@ -4,11 +4,12 @@ import { MarkerService } from '../marker.service';
 import { LocationService } from '../location.service';
 import { interval, Subscription } from 'rxjs';
 import { GeoJsonService } from '../geojson.service';
+import { AuthentService } from '../authent.service';
 
 
 export interface Session {
   traject_name:string;
-  times:Array<Date>;
+  times:Array<string>;
   user_id:number;
   positions:Array<any>;
 }
@@ -35,14 +36,17 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements OnInit,OnDestroy {
   private map;
   subscription: Subscription;
+  
   private session:Session={
-    traject_name:"",
+    traject_name:"test",
     times:[],
-    user_id:1,
+    user_id:+sessionStorage.getItem('id'),
     positions:[]
  };
+ private trajets:[];
+ 
   private initMap(): void {
-      
+    //console.log(sessionStorage.getItem('id'))
     this.map = L.map('map', {
     center: [ 39.8282, -98.5795 ],
     zoom: 3
@@ -62,7 +66,7 @@ export class MapComponent implements OnInit,OnDestroy {
 
   }
 
-  constructor(private markerService: MarkerService, private locationService: LocationService,private geojsonService:GeoJsonService) { }
+  constructor(private markerService: MarkerService, private locationService: LocationService,private geojsonService:GeoJsonService,private authetService:AuthentService) { }
 
   start():void{
     const source = interval(3000);
@@ -71,13 +75,15 @@ export class MapComponent implements OnInit,OnDestroy {
          console.log(`Positon: ${pos.lng} ${pos.lat}`);
          this.markerService.makeMarker(this.map,L.latLng(pos.lat,pos.lng));
          this.session.positions.push([pos.lat,pos.lng]);
-           this.session.times.push(new Date());
+         const date=new Date();
+           this.session.times.push(date.toLocaleString('en-GB', { timeZone: 'UTC' }));
       }) );
     console.log(this.session);
 
   }
   ngOnInit(): void {
     this.initMap();
+    console.log("this is our msg "+this.session.user_id)
    }
 
   stop():void{              
@@ -95,26 +101,26 @@ export class MapComponent implements OnInit,OnDestroy {
    save(){
         
         console.log("GeoJson To save")
-        console.log(this.geojsonService.sendGeoJson(this.session));
-        this.geojsonService.downloadGeoJson("");
+       // console.log(this.geojsonService.sendGeoJson(this.session));
+         this.geojsonService.sendGeoJson(this.session).subscribe(
+           res=>{
+             console.log("this is what we got"+res)
+           }
+         )
 
       }
 
-  show(){
-    //Json object from the back
-    //just to test
-  // this.geojsonService.GetGeoJSON().subscribe()
-    const data={"type":"FeatureCollection","name":"test123456","features":[{"type":"Feature","properties":{"dateTime":[],"user":{"id":12345}},"geometry":{"type":"LineString",
-    
-    
-    "coordinates":[[36.809368,10.095654],[37.809368,10.095654],[36.809368,11.095654]]
-    
-    
-    }}]}
-    this.markerService.showMarkers(this.map,data);
-    
+  getTrajets(){
+     this.authetService.getTrajets(this.session.user_id).subscribe(
+       res=>{
+        console.log(res);
+        this.trajets=res;
+     })
+  }
+  show(trajet_id:number){
 
-
+//use a single trajet with id
+//this.markerService.showMarkers(this.map,);
   }
      
   

@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   onSubmit(form:NgForm){
     this.firstName=form.value['firstName'];
     this.password=form.value['password'];
-    console.log(this.firstName);
+    
       return this.authentService.getuser(this.firstName,this.password);
   }
   
