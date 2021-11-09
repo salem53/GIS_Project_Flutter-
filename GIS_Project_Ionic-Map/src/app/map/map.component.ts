@@ -5,6 +5,7 @@ import { LocationService } from '../location.service';
 import { interval, Subscription } from 'rxjs';
 import { GeoJsonService } from '../geojson.service';
 import { AuthentService } from '../authent.service';
+import { Router } from '@angular/router';
 
 
 export interface Session {
@@ -66,7 +67,7 @@ export class MapComponent implements OnInit,OnDestroy {
 
   }
 
-  constructor(private markerService: MarkerService, private locationService: LocationService,private geojsonService:GeoJsonService,private authetService:AuthentService) { }
+  constructor(private route:Router,private markerService: MarkerService, private locationService: LocationService,private geojsonService:GeoJsonService,private authetService:AuthentService) { }
 
   start():void{
     const source = interval(3000);
@@ -82,9 +83,24 @@ export class MapComponent implements OnInit,OnDestroy {
 
   }
   ngOnInit(): void {
+    // if(this.map!=undefined)
+    // {
+    //   this.map.remove();
+    // }
     
-
     this.initMap();
+    if(sessionStorage.getItem('isShow')=='true'){
+        console.log(sessionStorage.getItem('data'))
+        console.log("h2")
+        var data=sessionStorage.getItem('data');
+        this.markerService.showMarkers(this.map,data);
+        console.log("h1")
+        sessionStorage.setItem('isShow','false');
+        console.log("h3")
+        console.log(sessionStorage.getItem('isShow'));
+        console.log("h4")
+
+      }
     console.log("this is our msg "+this.session.user_id)
    }
 

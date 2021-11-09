@@ -15,6 +15,6 @@ import { MapPageRoutingModule } from './map-routing.module';
     IonicModule,
     MapPageRoutingModule
   ],
-  declarations: [MapComponent]
+  declarations: []
 })
 export class MapPageModule {}
