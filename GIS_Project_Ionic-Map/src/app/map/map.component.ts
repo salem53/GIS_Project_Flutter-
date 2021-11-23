@@ -90,9 +90,11 @@ export class MapComponent implements OnInit,OnDestroy {
     
     this.initMap();
     if(sessionStorage.getItem('isShow')=='true'){
-        console.log(sessionStorage.getItem('data'))
+        console.log(sessionStorage.getItem('data')) 
         console.log("h2")
-        var data=sessionStorage.getItem('data');
+        console.log(JSON.parse(sessionStorage.getItem('data')))
+        var data=JSON.parse(sessionStorage.getItem('data'));
+        console.log(data)
         this.markerService.showMarkers(this.map,data);
         console.log("h1")
         sessionStorage.setItem('isShow','false');
