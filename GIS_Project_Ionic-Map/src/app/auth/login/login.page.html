@@ -9,7 +9,9 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
-        <ion-col>
+        <ion-col  size="3"></ion-col>
+        <ion-col  size="6">
+        
           <div text-center>
             <h3>Login</h3>
           </div>
@@ -29,19 +31,17 @@
       </ion-row>
 
       <ion-row>
-        <div text-center>
+        <ion-col size="3"></ion-col>
+        <ion-col size="6">
+        <div text-center class="divclass">
       If you don't have an account, please <a routerLink='/register'>
         register</a> first!
         </div>
+      </ion-col>
     </ion-row>
     
     </ion-grid>
   </form>
 </div>
 <br>
-<!-- <div padding >
-  <ion-button shape="round" expand="block" routerLink='/'> Home </ion-button>
 
-</div>
-<ion-button size="large" routerLink='/map' expand="block">test</ion-button>
-</ion-content> -->

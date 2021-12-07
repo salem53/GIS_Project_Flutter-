@@ -28,13 +28,10 @@ export class MarkerService {
       });
   }
   showMarkers(map:L.Map,data:any){
-
-    for (const c of data.features) {
-      const pos = c.geometry.coordinates;
-      pos.forEach(e => {
-        this.makeMarker(map,L.latLng(e[0],e[1]));
-        
-      });
+    console.log(data)
+   
+    for (const c of data.features.geometry.coordinates) {
+      this.makeMarker(map,L.latLng(c[0],c[1]));
           
   }
 

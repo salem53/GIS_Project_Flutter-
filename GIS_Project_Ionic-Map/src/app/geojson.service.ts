@@ -30,14 +30,8 @@ import { HttpClient } from '@angular/common/http';
         return this.http.post<any>('http://localhost:8081/trajet',data)
       
       }
-            
-    //   public GetGeoJSON():Observable<any>{
-    //     return this.http.get<any>('http://localhost:8081/${trajetId}')
-    // }  
+    
       downloadGeoJson(data:any){
-        //GET a geojson object from the back corresponding to that name_traject
-        /////////////////////////////////////////
-
         const strJson=  JSON.stringify(data);
         const blob = 
         new Blob([strJson

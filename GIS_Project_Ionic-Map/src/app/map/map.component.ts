@@ -83,27 +83,20 @@ export class MapComponent implements OnInit,OnDestroy {
 
   }
   ngOnInit(): void {
-    // if(this.map!=undefined)
-    // {
-    //   this.map.remove();
-    // }
+   
     
     this.initMap();
     if(sessionStorage.getItem('isShow')=='true'){
-        console.log(sessionStorage.getItem('data')) 
-        console.log("h2")
-        console.log(JSON.parse(sessionStorage.getItem('data')))
-        var data=JSON.parse(sessionStorage.getItem('data'));
-        console.log(data)
-        this.markerService.showMarkers(this.map,data);
-        console.log("h1")
+
+        var data=sessionStorage.getItem('data');
+     
+        this.markerService.showMarkers(this.map,JSON.parse(sessionStorage.getItem('data')));
+        
         sessionStorage.setItem('isShow','false');
-        console.log("h3")
-        console.log(sessionStorage.getItem('isShow'));
-        console.log("h4")
+    
 
       }
-    console.log("this is our msg "+this.session.user_id)
+ 
    }
 
   stop():void{              
@@ -121,28 +114,15 @@ export class MapComponent implements OnInit,OnDestroy {
    }
    save(){
         
-        console.log("GeoJson To save")
-       // console.log(this.geojsonService.sendGeoJson(this.session));
+      
          this.geojsonService.sendGeoJson(this.session).subscribe(
            res=>{
-             console.log("this is what we got"+res)
+          
            }
          )
 
       }
 
-  // getTrajets(){
-  //    this.authetService.getTrajets(this.session.user_id).subscribe(
-  //      res=>{
-  //       console.log(res);
-  //       this.trajets=res;
-  //    })
-  // }
-  show(trajet_id:number){
-
-//use a single trajet with id
-//this.markerService.showMarkers(this.map,);
-  }
   
      
   

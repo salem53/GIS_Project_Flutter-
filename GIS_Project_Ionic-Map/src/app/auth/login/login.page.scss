@@ -1,6 +1,8 @@
 .bg-style {
-    --ion-background-color : linear-gradient(#fffde4, #9ebdd8) !important;
-  }
+  // --ion-background-color : linear-gradient(#acaa94, #286eac) !important;
+  --background: url('../../../assets/icon/mapinscrit.jpg') ;
+  --background-size:center;
+ }
   
   .padding {
     padding: 5%;
@@ -10,3 +12,16 @@
     height: 250px;
     position: relative;
   }
+  
+   
+   
+   h3{
+     color: black;
+   }
+   .button{
+     background-color: #4CAF50;
+    
+   }
+   .divclass{
+     color:black;
+   }

@@ -38,7 +38,7 @@ export class HistoryPage implements OnInit {
   private Map1:MapComponent;
 
   constructor(private route:Router,private authentService:AuthentService,private geoService:GeoJsonService,private markerService: MarkerService, private locationService: LocationService,private geojsonService:GeoJsonService,private authetService:AuthentService ) {
-    // this.Map1=new MapComponent(markerService, locationService,geojsonService, authetService);
+
    }
 
   ngOnInit() {
@@ -48,6 +48,7 @@ export class HistoryPage implements OnInit {
     
   }
   getTrajets():any{
+
     this.authentService.getTrajets(1).subscribe(
       res=>{
        console.log(res);
@@ -55,12 +56,14 @@ export class HistoryPage implements OnInit {
        return this.trajets;
   
     })
+    console.log("msg lista kemla")
+ 
  }
  downloadTrajet(id:number){
   for (const element of this.trajets) {
     
     if(element['id']==id){
-      console.log("hello luv "+element['id']);
+ 
       this.geoService.downloadGeoJson(element);
     }
   }
@@ -68,11 +71,12 @@ export class HistoryPage implements OnInit {
  }
 
 getTrajet(id):any{
+  
   for (const element of this.trajets) {
     
     if(element['id']==id){
-      console.log("hello luv "+element['id']);
-      sessionStorage.setItem('data',element);
+      sessionStorage.setItem('data',JSON.stringify(element));
+   
       return element;
     }
   }
@@ -81,7 +85,7 @@ getTrajet(id):any{
 showTrajet(id: any){
 
  var trajet=this.getTrajet(id);
- sessionStorage.setItem('data',trajet);
+ sessionStorage.setItem('data',JSON.stringify(trajet));
  sessionStorage.setItem('isShow','true');
  setTimeout(() => {
   this.route.navigate(['/map']).then(()=>{location.reload()});
